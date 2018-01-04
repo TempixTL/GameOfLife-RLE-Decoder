@@ -50,13 +50,13 @@
 + (void) parseHeaderLine: (NSString*)line
 			ForWidth: (int*)width
 			Height: (int*)height
-			andRule: (NSString*)rule {
+			andRule: (NSString**)rule {
 	NSArray* headerComps = [line componentsSeparatedByString: @","];
 	
 	*width = [[[headerComps objectAtIndex: 0] componentsSeparatedByString: @"="] lastObject].intValue;
 	*height = [[[headerComps objectAtIndex: 1] componentsSeparatedByString: @"="] lastObject].intValue;
 	if ([headerComps count] > 2) {
-		rule = [[[[headerComps objectAtIndex: 2] componentsSeparatedByString: @"="] lastObject] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceCharacterSet];
+		*rule = [[[[headerComps objectAtIndex: 2] componentsSeparatedByString: @"="] lastObject] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceCharacterSet];
 	}
 }
 
@@ -84,7 +84,7 @@
 				name = [[line substringFromIndex: 2] stringByTrimmingCharactersInSet: NSCharacterSet.whitespaceCharacterSet];
 			}
 		} else if (firstChar == 'x') { //If line is the header
-			[RLEDecoder parseHeaderLine: line ForWidth: &width Height: &height andRule: rule];
+			[RLEDecoder parseHeaderLine: line ForWidth: &width Height: &height andRule: &rule];
 		} else { //Line is a part of the RLE pattern
 			[boardDataString appendString: line];
 		}
