@@ -8,3 +8,6 @@ default:
 
 clean:
 	$(RM) $(OUT)
+
+lint:
+	oclint $(FILES) -- $(CFLAGS)

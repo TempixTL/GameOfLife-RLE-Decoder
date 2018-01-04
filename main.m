@@ -6,7 +6,7 @@
 //More files can be found at http://conwaylife.com/wiki/
 NSString* path = @"./TestFiles/glider.rle";
 
-int main(int argc, char *argv[]) {
+int main() {
 	@autoreleasepool {
 		GLPattern* pattern = [RLEDecoder readPatternInFileAtPath: path];
 		NSLog(@"%@", pattern);
